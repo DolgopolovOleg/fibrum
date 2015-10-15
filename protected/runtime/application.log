@@ -7234,3 +7234,21 @@ Stack trace:
 REQUEST_URI=/images/slider-nav.png
 HTTP_REFERER=http://fibrum/css/responsive-slider.css
 ---
+2015/10/15 14:02:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "images/slider-nav.png".' in Z:\home\fibrum\www\framework\web\CWebApplication.php:286
+Stack trace:
+#0 Z:\home\fibrum\www\framework\web\CWebApplication.php(141): CWebApplication->runController('images/slider-n...')
+#1 Z:\home\fibrum\www\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 Z:\home\fibrum\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/images/slider-nav.png
+HTTP_REFERER=http://fibrum/css/responsive-slider.css
+---
+2015/10/15 14:02:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Невозможно обработать запрос "favicon.ico".' in Z:\home\fibrum\www\framework\web\CWebApplication.php:286
+Stack trace:
+#0 Z:\home\fibrum\www\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 Z:\home\fibrum\www\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 Z:\home\fibrum\www\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://fibrum/
+---
