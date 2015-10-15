@@ -6,7 +6,7 @@ return array(
     'gallery' => 'Gallery',
     'video' => 'Video',
     'press' => 'Press room',
-    'buy' => 'Buy',
+    'shop' => 'Buy',
     'sdk' => 'SDK',
     'contacts' => 'Contacts',
 );

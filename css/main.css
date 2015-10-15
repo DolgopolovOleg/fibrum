@@ -237,6 +237,10 @@ div.search-form
     margin: 10px;
 }
 
+.gallery-container .gallery-item img.not-show{
+    opacity: 0.3;
+}
+
 .gallery-container .gallery-item .option{
     text-align: center;
 }

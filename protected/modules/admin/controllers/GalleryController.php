@@ -24,7 +24,7 @@ class GalleryController extends Controller
         return array(
 
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions'=>array('admin','index','update','insertfile','del','upload','updfile','create','delete','view'),
+                'actions'=>array('admin','index','update','insertfile','del','upload','updfile','create','delete','view', 'switchvisible'),
                 'users'=>array('admin'),
             ),
             array('deny',  // deny all users
@@ -96,14 +96,15 @@ class GalleryController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
+    public function actionDelete($id)
+    {
+        $this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if(!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+    }
+
 
 	/**
 	 * Lists all models.
@@ -192,6 +193,7 @@ class GalleryController extends Controller
         $gallery->name = $result['filename'];
         $gallery->path = $random_dir ;
         $gallery->is_slider = 0 ;
+        $gallery->is_show = 0 ;
         $gallery->save();
 
         $result['path'] = $gallery->path;
@@ -232,20 +234,32 @@ class GalleryController extends Controller
             $docModel = new Gallery ;
             $update = $docModel->updateByPk($id, array('title'=>$fileName) );
 
-//            if( $update ){
-//                $totalArr = array(
-//                    'result' => true,
-//                );
-//            }else{
-//                $totalArr = array(
-//                    'result' => false,
-//                );
-//            }
             echo json_encode( array('result' => $update) ) ;
         }
     }
 
 
+    public function actionSwitchvisible()
+    {
+        if(
+            (!isset($_POST['reason']) || !isset($_POST['id'])) ||
+            ($_POST['reason'] !== 'is_show' && $_POST['reason'] !== 'is_slider') ){
+                echo json_encode( array('result' => false)  ) ;
+        }else{
+            $id = $_POST['id'];
+            $reason = $_POST['reason'];
+            $gallery = Gallery::model()->findByPk($id);
+            $gallery[$reason] = $gallery[$reason] == 1?0:1;
+            $gallery->save();
+            echo json_encode( array(
+                'result' => true,
+                'reason' => $_POST['reason'],
+                'id' => $_POST['id'],
+                'isShown' => $gallery[$reason]
+            ) ) ;
+        }
+
+    }
 
 
 

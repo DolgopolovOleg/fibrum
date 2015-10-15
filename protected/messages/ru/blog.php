@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'aboutProject' => 'О проекте',
+    'aboutProject' => 'О продукте',
     'apps' => 'VR Приложения',
     'gallery' => 'Галерея',
     'video' => 'Видео',
     'press' => 'Пресса',
-    'buy' => 'Заказать',
+    'shop' => 'Заказать',
     'sdk' => 'SDK',
     'contacts' => 'Контакты',
 );

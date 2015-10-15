@@ -48,7 +48,9 @@ class SiteController extends Controller
 
     public function actionApps()
     {
-        $this->render('index');
+        $this->render('apps', array(
+            'text' => 'Apps text!'
+        ));
     }
 
     public function actionGallery()
@@ -70,13 +72,25 @@ class SiteController extends Controller
 
     public function actionPress()
     {
-        $this->render('index');
+        $this->render('press', array(
+            'text' => 'Press text'
+        ));
+    }
+
+
+    public function actionShop()
+    {
+        $this->render('shop', array(
+            'text' => 'Shop text'
+        ));
     }
 
 
     public function actionSdk()
     {
-        $this->render('index');
+        $this->render('sdk', array(
+            'text' => 'sdk text'
+        ));
     }
 
 	/**

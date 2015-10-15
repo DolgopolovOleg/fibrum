@@ -32,6 +32,24 @@
             }
         );
     }
+
+    function switchVisible(reason, id){
+        $.post(
+            "/admin/gallery/switchvisible",
+            {
+                id: id,
+                reason: reason
+            },
+            function(data){
+                var jsonData = JSON.parse(data);
+                if(jsonData['result'] == true && jsonData['reason'] == 'is_show'){
+                    console.log(jsonData);
+                    var item = $('div.gallery-item[item-id=' + id + ']');
+                    $(item).remove();
+                }
+            }
+        );
+    }
 </script>
 
 <? $this->widget('ext.EAjaxUpload.EAjaxUpload',
@@ -58,12 +76,24 @@
 <div class="gallery-container">
     <?php
         foreach($gallery as $item){
+            $is_show_style = $item['is_show'] ? '' : 'not-show' ;
+            $is_shown = $item['is_show']?'checked':'';
+            $is_slider = $item['is_slider']?'checked':'';
     ?>
         <div class="gallery-item" item-id="<?=$item['id'];?>">
-            <img src="/files/<?=$item['path'];?>/<?=$item['name'];?>" alt="<?=$item['name'];?>" style="width:150px;"/>
+            <img class="<?=$is_show_style;?>" src="/files/<?=$item['path'];?>/<?=$item['name'];?>" alt="<?=$item['name'];?>" style="width:150px;"/>
             <div class="option">
                 <span onclick="deleteGallItem(<?=$item['id'];?>)">Удалить</span>
             </div>
+            <div class="option">
+                <label for="">Показывать: <?=$is_shown;?> </label>
+                <input type="checkbox" name="is_show" value="true" <?=$is_shown;?> onclick="switchVisible('is_show', <?=$item['id'];?>)" />
+            </div>
+            <div class="option">
+                <label for="">Показывать в слайдере:</label>
+                <input type="checkbox" name="is_slider" value="true" <?=$is_slider;?> onclick="switchVisible('is_slider', <?=$item['id'];?>)" />
+            </div>
+
         </div>
     <?php
         }

@@ -93,8 +93,8 @@ return array(
         'UFP' => realpath( dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..' . DIRECTORY_SEPARATOR . 'files') ,
         'OS' => someFunc($_SERVER['HTTP_USER_AGENT']),
         'translatedLanguages'=>array(
-            'ru'=>'Russian',
-            'en'=>'English',
+            'ru'=>'RU',
+            'en'=>'EN',
         ),
         'defaultLanguage'=>'ru',
 	),

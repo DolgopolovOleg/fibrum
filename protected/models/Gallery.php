@@ -8,6 +8,7 @@
  * @property string $path
  * @property integer $name
  * @property integer $is_slider
+ * @property integer $is_show
  */
 class Gallery extends CActiveRecord
 {
@@ -27,7 +28,7 @@ class Gallery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('is_slider', 'numerical', 'integerOnly'=>true),
+			array('is_slider, is_show', 'numerical', 'integerOnly'=>true),
 			array('path, name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -55,7 +56,8 @@ class Gallery extends CActiveRecord
 			'id' => 'ID',
 			'path' => 'Путь',
             'name' => 'Имя',
-			'is_slider' => 'Показывать в слайдере',
+            'is_show' => 'Показывать в галерее',
+            'is_slider' => 'Показывать в слайдере',
 		);
 	}
 
@@ -81,6 +83,7 @@ class Gallery extends CActiveRecord
 		$criteria->compare('path',$this->path,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('is_slider',$this->is_slider);
+		$criteria->compare('is_show',$this->is_show);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
